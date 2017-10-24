@@ -1,0 +1,11 @@
+nodes.conf
+config.yml
+node_modules/*
+*.log*
+services/init.coffee
+public/*
+.byebug_history
+.vagrant
+_site
+docker-compose.yml
+Dockerfile.*
