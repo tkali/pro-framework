@@ -8,4 +8,5 @@ public/*
 .vagrant
 _site
 docker-compose.yml
+!tools/containers/docker/docker-compose.yml
 Dockerfile.*
