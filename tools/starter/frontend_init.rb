@@ -17,7 +17,7 @@ libs += ["global.Views = [#{views}]"]
 list = ["framework/services/index.coffee"]
 list += ['framework/app/app.imba'] unless File.exist? 'app/app.imba'
 list +=
-  PathsResolver.resolve('s(c|a)ss', sort: true) +
+  PathsResolver.resolve('(s?c|sa)ss', sort: true) +
   PathsResolver.resolve('(jpe?g|png|gif|svg)') +
   PathsResolver.resolve('(imba|js|coffee)', sort: :leafs_first)
 
