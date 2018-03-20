@@ -4,7 +4,7 @@ node_modules/*
 *.log*
 services/init.coffee
 public/*
-!public/.gitignore
+!public/.gitkeep
 .byebug_history
 .vagrant
 _site

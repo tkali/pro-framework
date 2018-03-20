@@ -1,7 +1,9 @@
 const webpack = require('webpack');
 const CompressionPlugin = require("compression-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 module.exports = {
+  mode: 'production',
   cache: false,
   context: __dirname,
   entry: '../../../services/init',
@@ -12,25 +14,16 @@ module.exports = {
 	path: __dirname + '/../../../public',
     filename: 'bundle.js'
   },
+  optimization: {
+    minimize: true,
+	minimizer: [
+      new UglifyJsPlugin({
+        exclude: [/\.min\.js$/gi] // skip pre-minified libs
+      })
+    ]
+  },
   devtool: 'cheap-module-source-map',
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: true,
-      compress: {
-        warnings: false, // Suppress uglification warnings
-        pure_getters: true,
-        unsafe: true,
-        unsafe_comps: true,
-        screw_ie8: true
-      },
-      output: {
-        comments: false,
-      },
-      exclude: [/\.min\.js$/gi] // skip pre-minified libs
-    }),
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
     new webpack.NoEmitOnErrorsPlugin(),
     new CompressionPlugin({
@@ -48,7 +41,6 @@ module.exports = {
         use: [
 			{ loader: 'style-loader' },
 			{ loader: 'css-loader' },
-			{ loader: 'autoprefixer-loader', options: { browsers: 'last 3 versions' } },
 			{ loader: 'sass-loader', options: { outputStyle: 'expanded' } }
         ]
       },
